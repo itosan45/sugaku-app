@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+<meta name="theme-color" content="#071a20">
+<title>数学マスター | 静岡県高校受験</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#06151b;color:#edfdfb;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;min-height:100vh}button,input{font:inherit}button{cursor:pointer}#app{max-width:440px;margin:auto;padding:18px 15px 70px}.screen{display:none}.screen.active{display:block}.top{display:flex;align-items:center;gap:12px;margin-bottom:18px}.back{width:40px;height:40px;border:1px solid #24434c;border-radius:12px;background:#10272f;color:#9fc1c8}.grow{flex:1}.title{font-size:26px;font-weight:900;letter-spacing:-.7px}.sub{color:#7ca0a8;font-size:13px;margin-top:4px}.streak{display:inline-block;margin-top:10px;background:#f59e0b18;border:1px solid #f59e0b55;color:#fbbf24;padding:5px 11px;border-radius:99px;font-weight:800;font-size:12px}.hero,.card{background:#10272f;border:1px solid #173941;border-radius:19px;padding:18px;margin-bottom:12px}.hero{background:linear-gradient(145deg,#12343b,#0d2229)}.progress{height:7px;background:#183840;border-radius:99px;overflow:hidden}.fill{height:100%;background:linear-gradient(90deg,#14b8a6,#22d3ee);transition:width .35s}.section{margin:24px 3px 10px;color:#5f8790;font-size:11px;font-weight:900;letter-spacing:1px}.subject{display:flex;align-items:center;gap:13px;width:100%;text-align:left;color:inherit}.icon{width:48px;height:48px;border-radius:14px;display:grid;place-items:center;font-size:24px}.subject h3{margin:0 0 4px;font-size:16px}.subject p{margin:0;color:#6d929a;font-size:12px}.arrow{margin-left:auto;color:#22d3ee;font-size:22px}.btn{width:100%;border:0;border-radius:15px;padding:15px 16px;margin-top:9px;background:linear-gradient(135deg,#0d9488,#0891b2);color:white;font-weight:900}.btn.secondary{background:#10272f;border:1px solid #24434c;color:#a8c6cc}.btn:disabled{opacity:.45}.unit{display:flex;align-items:center;gap:12px;text-align:left;width:100%;color:inherit}.unit-num{width:40px;height:40px;border-radius:12px;display:grid;place-items:center;background:#163840;color:#5eead4;font-weight:900}.unit.done{border-color:#10b98155}.tag{display:inline-block;padding:4px 9px;border-radius:99px;background:#0f766e30;color:#5eead4;font-size:11px;font-weight:900}.qtext{font-size:19px;line-height:1.55;font-weight:850;margin:15px 0}.diagram{background:#f8fafc;color:#0f172a;border-radius:14px;padding:13px;margin:12px 0;text-align:center;overflow:auto}.choices{display:grid;gap:9px}.choice{padding:14px;border:2px solid #24434c;border-radius:13px;background:#0a1e25;color:#e7fbf8;text-align:left;font-weight:700}.choice.correct{border-color:#10b981;background:#064e3b}.choice.wrong{border-color:#ef4444;background:#4c1118}.timer{margin:14px 0}.timer-row{display:flex;justify-content:space-between;color:#6f969e;font-size:12px;margin-bottom:6px}.hint{display:none;background:#2b2110;border:1px solid #f59e0b66;color:#fde68a;border-radius:14px;padding:14px;line-height:1.55;margin:12px 0}.hint.show{display:block}.feedback{display:none;border-radius:15px;padding:15px;line-height:1.6;margin:12px 0}.feedback.show{display:block}.feedback.ok{background:#063d32;border:1px solid #10b98166}.feedback.ng{background:#42151a;border:1px solid #ef444466}.numrow{display:flex;gap:8px}.numrow input{flex:1;min-width:0;background:#071a20;color:white;border:2px solid #24434c;border-radius:13px;padding:14px}.numrow span{padding:14px;background:#15343c;border-radius:13px}.result{text-align:center}.score{font-size:50px;font-weight:950;color:#5eead4}.breakdown{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:14px}.stat{background:#0a1f26;border-radius:13px;padding:13px}.small{font-size:12px;color:#72969e}.modal{position:fixed;inset:0;background:#000b;display:none;align-items:center;justify-content:center;padding:20px;z-index:20}.modal.show{display:flex}.modal .box{max-width:420px;width:100%;background:#10272f;border-radius:20px;padding:20px}.danger{color:#fca5a5}.daily{border-color:#22d3ee55;background:linear-gradient(135deg,#12343b,#10272f)}@media(max-width:360px){.qtext{font-size:17px}.title{font-size:23px}}
+</style>
+</head>
+<body>
+<main id="app">
+<section id="screen-home" class="screen active">
+  <div class="title">📐 数学マスター</div>
+  <div class="sub">浅羽中3年生・静岡県公立高校入試対策</div>
+  <div class="streak" id="streak">🔥 0日連続</div>
+  <div class="hero" style="margin-top:18px">
+    <div style="display:flex;justify-content:space-between;align-items:end"><div><b>全体進捗</b><div class="small" id="overall-text">基礎から積み上げよう</div></div><b id="overall-pct">0%</b></div>
+    <div class="progress" style="margin-top:12px"><div class="fill" id="overall-fill" style="width:0"></div></div>
+  </div>
+  <div class="card daily">
+    <span class="tag">今日の10分</span><h3 style="margin:10px 0 5px">まず5問だけ解こう</h3>
+    <div class="small">基礎と苦手を混ぜて、無理なく続けます。</div>
+    <button class="btn" onclick="startDaily()">今日の学習を始める</button>
+  </div>
+  <div class="section">▸ 分野を選ぶ</div><div id="subject-list"></div>
+  <div class="section">▸ 入試対策</div>
+  <button class="btn secondary" onclick="showShizuoka()">🗻 静岡県入試モード</button>
+  <button class="btn secondary" onclick="startWeak()">🎯 苦手だけ集中特訓</button>
+  <button class="btn secondary" onclick="showStats()">📊 学習記録を見る</button>
+</section>
+
+<section id="screen-units" class="screen">
+  <div class="top"><button class="back" onclick="goHome()">←</button><div><b id="units-title"></b><div class="small" id="units-sub"></div></div></div>
+  <div id="unit-list"></div>
+</section>
+
+<section id="screen-question" class="screen">
+  <div class="top"><button class="back" onclick="leaveQuiz()">←</button><div class="grow progress"><div id="q-progress" class="fill"></div></div><span class="small" id="q-count"></span></div>
+  <div class="card">
+    <div style="display:flex;gap:7px"><span class="tag" id="q-field"></span><span class="tag" id="q-level"></span></div>
+    <div class="qtext" id="q-prompt"></div><div id="q-diagram"></div><div id="answer-area"></div>
+  </div>
+  <div class="timer" id="hint-countdown"><div class="timer-row"><span>自力で考える時間</span><span id="timer-number">30秒</span></div><div class="progress"><div class="fill" id="timer-fill" style="width:100%"></div></div></div>
+  <div class="hint" id="hint-box"><b>💡 30秒ヒント</b><div id="hint-text" style="margin-top:6px"></div><button class="btn secondary" id="hint2-btn" onclick="showHint2()">もう一段ヒント</button><div id="hint2-text"></div></div>
+  <div class="feedback" id="feedback"></div>
+  <button class="btn" id="next-btn" style="display:none" onclick="nextQuestion()">次へ →</button>
+</section>
+
+<section id="screen-result" class="screen"><div class="result hero"><div class="small">今回の結果</div><div class="score" id="result-score"></div><h2 id="result-message"></h2><div class="breakdown" id="result-breakdown"></div></div><button class="btn" onclick="retryWrong()">間違えた問題を復習</button><button class="btn secondary" onclick="goHome()">ホームへ</button></section>
+<section id="screen-stats" class="screen"><div class="top"><button class="back" onclick="goHome()">←</button><b>学習記録</b></div><div id="stats-content"></div></section>
+<section id="screen-shizuoka" class="screen"><div class="top"><button class="back" onclick="goHome()">←</button><div><b>🗻 静岡県入試モード</b><div class="small">50分・50点を意識した実戦練習</div></div></div><div class="hero"><h3>直近入試の重点</h3><p class="small">文章題の立式、空間図形、関数の座標、証明を重点化。まず取るべき基礎点から段階的に伸ばします。</p></div><button class="btn" onclick="startMiniMock()">10問ミニ模試</button><button class="btn secondary" onclick="startFullMock()">50点チャレンジ（25問）</button></section>
+</main>
+<div class="modal" id="diagram-modal" onclick="this.classList.remove('show')"><div class="box" id="diagram-large"></div></div>
+
+<script id="learning-engine">
+function createQuestionState(questionId){return{questionId,remainingSeconds:30,hintVisible:false,answered:false,usedHint:false}}
+function tickQuestionState(state){if(state.answered||state.hintVisible)return state;const n=Math.max(0,state.remainingSeconds-1);return{...state,remainingSeconds:n,hintVisible:n===0,usedHint:n===0}}
+function answerQuestionState(state,isCorrect){if(state.answered)return state;return{...state,answered:true,isCorrect}}
+function advanceQuestionState(nextQuestionId){return createQuestionState(nextQuestionId)}
+function nextWeakLevel(current,correct,usedHint){if(correct&&!usedHint)return Math.max(0,current-1);if(correct)return current;return current+1}
+function isUnitCleared(correctCount,totalCount){return totalCount>0&&correctCount/totalCount>=.7}
+</script>
+<script>
+const SUBJECTS=[
+ {id:"algebra",name:"数と式",emoji:"➗",color:"#f59e0b",desc:"計算・方程式・式の活用"},
+ {id:"function",name:"関数",emoji:"📈",color:"#22d3ee",desc:"比例・一次関数・放物線"},
+ {id:"geometry",name:"図形",emoji:"📐",color:"#a78bfa",desc:"作図・相似・円・空間図形"},
+ {id:"data",name:"データ・確率",emoji:"🎲",color:"#10b981",desc:"確率・資料・標本調査"}
+];
+const UNIT_DEFS={
+ algebra:["正負の数・文字式","式の計算・平方根","方程式","連立方程式","二次方程式・文章題","数と式入試演習"],
+ function:["比例・反比例","一次関数","変化の割合","関数と図形","y=ax²","関数入試演習"],
+ geometry:["基本図形・作図","平行線と角","合同・証明","相似・円","三平方・空間図形","図形入試演習"],
+ data:["場合の数・確率","資料の整理","箱ひげ図","標本調査","データ活用","データ入試演習"]
+};
+const UNITS=SUBJECTS.flatMap(s=>UNIT_DEFS[s.id].map((name,i)=>({id:`${s.id}-${i+1}`,subjectId:s.id,name,level:i<2?"基礎":i<5?"標準":"入試",count:5})));
+const BASE=[
+["algebra",1,"number","−7＋12を計算しよう。",5,"",0.01,"数直線で−7から右へ12進む。","−7＋12＝5。符号が異なる加法は絶対値の差を求め、大きい方の符号を付ける。"],
+["algebra",1,"number","3a−2a＋5を、a=4のとき計算しよう。",9,"",0.01,"先に同類項3a−2aをまとめる。","3a−2a＋5＝a＋5。a=4より9。"],
+["algebra",2,"number","√48をa√3の形にしたとき、aはいくつ？",4,"",0.01,"48を平方数×3に分ける。","√48＝√(16×3)＝4√3なのでa=4。"],
+["algebra",2,"number","(x＋3)(x−2)を展開したときの定数項は？",-6,"",0.01,"最後の数どうしを掛ける。","x²＋x−6となるため定数項は−6。"],
+["algebra",3,"number","5x−7=18を解こう。",5,"",0.01,"まず両辺に7を足す。","5x=25、よってx=5。"],
+["algebra",3,"number","x/3＋2=6を解こう。",12,"",0.01,"2を移項してから3倍する。","x/3=4、よってx=12。"],
+["algebra",4,"number","x＋y=9、x−y=3を満たすxは？",6,"",0.01,"2つの式を加えるとyが消える。","2x=12よりx=6。"],
+["algebra",4,"text","りんごx個を1個120円、みかんy個を1個80円で買い合計1000円。金額の式を書こう。",["120x","80y","1000"],0,"個数×単価をそれぞれ足す。","120x＋80y＝1000。何をx、yとしたかも答案に明記する。"],
+["algebra",5,"number","x²−5x＋6=0の小さい方の解は？",2,"",0.01,"積が6、和が−5になる2数を探す。","(x−2)(x−3)=0よりx=2,3。小さい方は2。"],
+["algebra",5,"number","縦が横より3cm長い長方形の面積が40cm²。横の長さは？",5,"cm",0.01,"横をx、縦をx＋3として面積の式を作る。","x(x＋3)=40、x²＋3x−40=0、(x−5)(x＋8)=0。長さなのでx=5cm。"],
+["function",1,"number","y=3xでx=4のときyは？",12,"",0.01,"xに4を代入する。","y=3×4=12。"],
+["function",1,"number","y=12/xでx=3のときyは？",4,"",0.01,"反比例の式に代入する。","y=12÷3=4。"],
+["function",2,"number","直線y=2x−1でx=3のときのy座標は？",5,"",0.01,"x=3を式に代入する。","y=2×3−1=5。点は(3,5)。"],
+["function",2,"number","点(1,3)を通り傾き2の直線の切片は？",1,"",0.01,"y=2x+bに座標を代入する。","3=2×1+bよりb=1。"],
+["function",3,"number","xが2から6まで増え、yが5から13まで増えた。変化の割合は？",2,"",0.01,"yの増加量÷xの増加量。","(13−5)÷(6−2)=8÷4=2。"],
+["function",3,"choice","一次関数y=−3x＋4のグラフとして正しい特徴は？",["右上がりで切片4","右下がりで切片4","右下がりで切片−3","原点を通る"],1,"傾きの符号と切片を見る。","傾き−3なので右下がり、y切片は4。"],
+["function",4,"number","直線y=x＋2とx軸の交点のx座標は？",-2,"",0.01,"x軸上ではy=0。","0=x＋2よりx=−2。"],
+["function",4,"number","点A(2,5)とB(6,13)を通る直線の傾きは？",2,"",0.01,"yの差をxの差で割る。","(13−5)÷(6−2)=2。"],
+["function",5,"number","y=2x²でx=−3のときyは？",18,"",0.01,"負の数を2乗すると正になる。","y=2×(−3)²=18。"],
+["function",5,"number","y=ax²が点(2,12)を通る。aは？",3,"",0.01,"x=2、y=12を代入する。","12=a×2²=4aよりa=3。"],
+["geometry",1,"choice","線分ABの垂直二等分線上の点Pについて正しいものは？",["PA=PB","PA⊥PB","∠APB=90°","Pは必ずAB上"],0,"垂直二等分線の性質を思い出す。","垂直二等分線上の点は、線分の両端から等距離にあるためPA=PB。"],
+["geometry",1,"choice","角の二等分線上の点の性質は？",["2辺からの距離が等しい","頂点からの距離が0","必ず円の中心","角が90°になる"],0,"角をつくる2辺への垂線の長さを見る。","角の二等分線上の点は、角をつくる2辺からの距離が等しい。"],
+["geometry",2,"number","三角形の2つの内角が48°と67°。残りの角は？",65,"°",0.01,"三角形の内角の和は180°。","180−48−67=65°。"],
+["geometry",2,"number","平行線の同位角が72°。対応する同位角は？",72,"°",0.01,"平行線では同位角が等しい。","平行線の同位角は等しいため72°。"],
+["geometry",3,"text","△ABCと△DEFでAB=DE、BC=EF、AC=DF。合同条件を書こう。",["3組","辺"],0,"与えられた等しい要素はすべて辺。","3組の辺がそれぞれ等しいので、三辺相等により合同。"],
+["geometry",3,"text","証明で「∠A=∠D、∠B=∠E」のあと合同を示すには、さらに何が必要？",["辺"],0,"角2組だけでは大きさが決まらない。","対応する一辺が等しいことを示し、一辺とその両端の角、または二角と一辺の合同条件を使う。"],
+["geometry",4,"number","相似比が2:3の図形で、小さい図形の面積が20cm²。大きい図形の面積は？",45,"cm²",0.01,"面積比は相似比の2乗。","面積比4:9。20×9÷4=45cm²。"],
+["geometry",4,"number","半径6cm、中心角60°のおうぎ形の面積は？",18.8496,"cm²",0.05,"円の面積×60/360。","36π×1/6=6π≒18.85cm²。"],
+["geometry",5,"number","直角三角形の2辺が6cmと8cm。斜辺は？",10,"cm",0.01,"斜辺²=6²＋8²。","√(36＋64)=√100=10cm。"],
+["geometry",5,"number","底面積12cm²、高さ9cmの三角柱の体積は？",108,"cm³",0.01,"柱体の体積=底面積×高さ。","12×9=108cm³。"],
+["data",1,"number","硬貨を2回投げるとき、2回とも表になる確率は？",0.25,"",0.001,"起こり方を 表表、表裏、裏表、裏裏 と書く。","4通りが同様に確からしく、表表は1通りなので1/4=0.25。"],
+["data",1,"number","1～6のさいころで偶数が出る確率は？",0.5,"",0.001,"偶数は2、4、6の3通り。","3/6=1/2=0.5。"],
+["data",2,"number","データ4,6,7,8,10の中央値は？",7,"",0.01,"小さい順の中央を見る。","5個の中央である3番目は7。"],
+["data",2,"number","データ3,5,5,7,10の平均値は？",6,"",0.01,"合計を個数5で割る。","(3＋5＋5＋7＋10)÷5=30÷5=6。"],
+["data",3,"number","第1四分位数が12、第3四分位数が20。四分位範囲は？",8,"",0.01,"第3四分位数−第1四分位数。","20−12=8。"],
+["data",3,"choice","箱ひげ図の箱が長いと何を表す？",["中央50%の散らばりが大きい","平均値が必ず大きい","人数が多い","最大値が0"],0,"箱は第1四分位数から第3四分位数。","箱の長さは四分位範囲で、中央50%のデータの散らばりを表す。"],
+["data",4,"number","500人から無作為に50人を調べ、賛成が30人。全体の賛成者を推定すると？",300,"人",1,"標本の割合30/50を全体500に掛ける。","500×30/50=300人。"],
+["data",4,"choice","標本調査で最も大切な標本の選び方は？",["無作為に選ぶ","賛成者だけ選ぶ","近い人だけ選ぶ","人数を1人にする"],0,"全体の特徴を偏りなく映す必要がある。","母集団から無作為に抽出し、偏りを小さくする。"]
+];
+function buildQuestions(){
+ let n=0;const out=[];
+ for(const b of BASE)for(let v=0;v<4;v++){n++;const [sid,ui,type,prompt]=b;const hint=type==="number"?b[7]:b[6],explanation=type==="number"?b[8]:b[7];const q={id:`q${n}`,unitId:`${sid}-${ui}`,subjectId:sid,type,level:ui<3?"基礎":ui<6?"標準":"入試",prompt:v?`${prompt}（類題${v+1}）`:prompt,hint1:hint,hint2:`条件を式や図に書き込み、${type==="number"?"途中式を1行ずつ進めよう。":"使う性質と根拠を確かめよう。"}`,explanation,misconception:"暗算で急がず、条件・式・符号・単位を順番に確認しよう。"};
+  if(type==="choice"){q.choices=b[4];q.answer=b[5]}else if(type==="number"){q.answer=b[4];q.unit=b[5];q.tolerance=b[6]}else if(type==="order"){q.items=b[4];q.answer=b[4]}else{q.required=b[4];q.model=explanation}
+  out.push(q);
+ }return out;
+}
+const QUESTIONS=buildQuestions();
+const STORE="sugaku_master_v1";
+const DEFAULT={cleared:[],weak:{},attempts:0,correct:0,streak:0,lastDate:"",history:[]};
+function loadStore(){try{return{...DEFAULT,...JSON.parse(localStorage.getItem(STORE)||"{}")}}catch{return{...DEFAULT}}}
+let data=loadStore(),currentSubject=null,currentUnit=null,deck=[],qIndex=0,results=[],qState=null,hintTimerId=null,sessionType="unit";
+function save(){localStorage.setItem(STORE,JSON.stringify(data))}
+function show(id){stopHintTimer();document.querySelectorAll(".screen").forEach(x=>x.classList.remove("active"));document.getElementById(`screen-${id}`).classList.add("active");scrollTo(0,0)}
+function subjectOf(id){return SUBJECTS.find(s=>s.id===id)}
+function updateStreak(){const t=new Date().toDateString(),y=new Date(Date.now()-86400000).toDateString();if(data.lastDate!==t){data.streak=data.lastDate===y?data.streak+1:1;data.lastDate=t;save()}document.getElementById("streak").textContent=`🔥 ${data.streak}日連続`}
+function renderHome(){updateStreak();const p=Math.round(data.cleared.length/UNITS.length*100);document.getElementById("overall-pct").textContent=p+"%";document.getElementById("overall-fill").style.width=p+"%";document.getElementById("overall-text").textContent=`${data.cleared.length}/${UNITS.length}単元クリア`;document.getElementById("subject-list").innerHTML=SUBJECTS.map(s=>`<button class="card subject" onclick="openSubject('${s.id}')"><span class="icon" style="background:${s.color}22">${s.emoji}</span><span><h3>${s.name}</h3><p>${s.desc}</p></span><span class="arrow">›</span></button>`).join("")}
+function goHome(){show("home");renderHome()}
+function openSubject(id){currentSubject=subjectOf(id);document.getElementById("units-title").textContent=`${currentSubject.emoji} ${currentSubject.name}`;document.getElementById("units-sub").textContent=currentSubject.desc;document.getElementById("unit-list").innerHTML=UNITS.filter(u=>u.subjectId===id).map((u,i)=>`<button class="card unit ${data.cleared.includes(u.id)?"done":""}" onclick="startUnit('${u.id}')"><span class="unit-num">${data.cleared.includes(u.id)?"✓":i+1}</span><span class="grow"><b>${u.name}</b><div class="small">${u.level}・5問</div></span><span>›</span></button>`).join("");show("units")}
+function startUnit(id){currentUnit=UNITS.find(u=>u.id===id);currentSubject=subjectOf(currentUnit.subjectId);deck=shuffle(QUESTIONS.filter(q=>q.unitId===id)).slice(0,5);beginSession("unit")}
+function shuffle(a){return[...a].sort(()=>Math.random()-.5)}
+function beginSession(type){sessionType=type;qIndex=0;results=[];show("question");loadQuestion()}
+function startDaily(){const weakIds=Object.entries(data.weak).filter(([,v])=>v>0).map(([id])=>id);const pool=[...QUESTIONS.filter(q=>weakIds.includes(q.id)),...shuffle(QUESTIONS)];deck=[...new Map(pool.map(q=>[q.id,q])).values()].slice(0,5);currentUnit=null;currentSubject={name:"今日の10分",emoji:"⏱"};beginSession("daily")}
+function startWeak(){const pool=QUESTIONS.filter(q=>(data.weak[q.id]||0)>0).sort((a,b)=>(data.weak[b.id]||0)-(data.weak[a.id]||0));if(!pool.length){alert("苦手問題はまだありません。まず今日の学習に挑戦しよう。");return}deck=pool.slice(0,10);currentUnit=null;currentSubject={name:"苦手特訓",emoji:"🎯"};beginSession("weak")}
+function showShizuoka(){show("shizuoka")}
+function startMiniMock(){deck=balanced(10);currentUnit=null;currentSubject={name:"静岡県ミニ模試",emoji:"🗻"};beginSession("mock")}
+function startFullMock(){deck=balanced(25);currentUnit=null;currentSubject={name:"50点チャレンジ",emoji:"📝"};beginSession("full")}
+function balanced(count){const each=Math.floor(count/4),arr=[];SUBJECTS.forEach((s,i)=>arr.push(...shuffle(QUESTIONS.filter(q=>q.subjectId===s.id&&q.level!=="基礎")).slice(0,each+(i<count%4?1:0))));return shuffle(arr)}
+function loadQuestion(){const q=deck[qIndex];qState=createQuestionState(q.id);document.getElementById("q-count").textContent=`${qIndex+1}/${deck.length}`;document.getElementById("q-progress").style.width=`${qIndex/deck.length*100}%`;document.getElementById("q-field").textContent=`${subjectOf(q.subjectId).emoji} ${subjectOf(q.subjectId).name}`;document.getElementById("q-level").textContent=q.level;document.getElementById("q-prompt").textContent=q.prompt;document.getElementById("q-diagram").innerHTML=makeDiagram(q);renderAnswer(q);document.getElementById("hint-box").classList.remove("show");document.getElementById("hint2-text").textContent="";document.getElementById("hint2-btn").style.display="block";document.getElementById("feedback").className="feedback";document.getElementById("next-btn").style.display="none";renderTimer();startHintTimer()}
+function makeDiagram(q){if(q.subjectId==="function")return`<div class="diagram" onclick="enlarge(this.innerHTML)"><svg viewBox="0 0 300 150"><line x1="20" y1="75" x2="285" y2="75" stroke="#64748b"/><line x1="150" y1="10" x2="150" y2="140" stroke="#64748b"/><path d="M35 125 L250 20" stroke="#0891b2" stroke-width="3" fill="none"/><text x="270" y="68">x</text><text x="157" y="18">y</text></svg><div class="small">座標・傾き・切片を図で確認</div></div>`;if(q.subjectId==="geometry")return`<div class="diagram" onclick="enlarge(this.innerHTML)"><svg viewBox="0 0 300 150"><path d="M45 125 L150 20 L255 125 Z" stroke="#7c3aed" stroke-width="4" fill="none"/><line x1="150" y1="20" x2="150" y2="125" stroke="#f59e0b" stroke-dasharray="6 4"/><text x="142" y="145">底辺</text><text x="157" y="75">高さ</text></svg><div class="small">対応する辺・角、底面と高さを確認</div></div>`;if(q.type==="number")return`<div class="diagram"><b>途中式メモ</b><br>求める量 → 使う公式 → 数値を代入 → 符号・単位を確認</div>`;return""}
+function enlarge(html){document.getElementById("diagram-large").innerHTML=html;document.getElementById("diagram-modal").classList.add("show")}
+function renderAnswer(q){const a=document.getElementById("answer-area");if(q.type==="choice")a.innerHTML=`<div class="choices">${q.choices.map((c,i)=>`<button class="choice" onclick="answer(${i},this)">${c}</button>`).join("")}</div>`;else if(q.type==="number")a.innerHTML=`<div class="numrow"><input id="number-answer" inputmode="decimal" placeholder="数値を入力"><span>${q.unit}</span></div><button class="btn" onclick="answerNumber()">答える</button>`;else if(q.type==="order")a.innerHTML=`<div class="small">正しい順番を考えよう</div><div class="choices">${q.items.map((x,i)=>`<button class="choice" onclick="answerOrder(${i})">${i+1}. ${x}</button>`).join("")}</div><button class="btn" onclick="answerOrderDone()">この順で答える</button>`;else a.innerHTML=`<textarea id="text-answer" style="width:100%;min-height:100px;background:#071a20;color:white;border:2px solid #24434c;border-radius:13px;padding:12px" placeholder="理由を書こう"></textarea><button class="btn" onclick="answerText()">答える</button>`}
+function startHintTimer(){stopHintTimer();const seconds=window.__HINT_SECONDS__??30;qState={...qState,remainingSeconds:seconds};hintTimerId=setInterval(()=>{qState=tickQuestionState(qState);renderTimer();if(qState.hintVisible){showHint();stopHintTimer()}},1000)}
+function stopHintTimer(){if(hintTimerId){clearInterval(hintTimerId);hintTimerId=null}}
+function renderTimer(){document.getElementById("timer-number").textContent=`${qState.remainingSeconds}秒`;document.getElementById("timer-fill").style.width=`${qState.remainingSeconds/30*100}%`;document.getElementById("hint-countdown").style.display=qState.answered||qState.hintVisible?"none":"block"}
+function showHint(){qState={...qState,hintVisible:true,usedHint:true};const q=deck[qIndex];document.getElementById("hint-text").textContent=q.hint1;document.getElementById("hint-box").classList.add("show")}
+function showHint2(){qState={...qState,usedHint:true};document.getElementById("hint2-text").textContent=deck[qIndex].hint2;document.getElementById("hint2-btn").style.display="none"}
+function answer(chosen,btn){finishAnswer(chosen===deck[qIndex].answer,btn,deck[qIndex].choices[deck[qIndex].answer])}
+function answerNumber(){const q=deck[qIndex],v=Number(document.getElementById("number-answer").value);finishAnswer(Number.isFinite(v)&&Math.abs(v-q.answer)<=q.tolerance,null,`${q.answer}${q.unit}`)}
+let orderClicks=[];function answerOrder(i){if(!qState.answered&&!orderClicks.includes(i)){orderClicks.push(i);event.currentTarget.style.opacity=".45"}}
+function answerOrderDone(){const q=deck[qIndex],ok=orderClicks.length===q.items.length&&orderClicks.every((x,i)=>x===i);finishAnswer(ok,null,q.items.join(" → "));orderClicks=[]}
+function answerText(){const q=deck[qIndex],t=document.getElementById("text-answer").value,ok=q.required.every(k=>t.includes(k));finishAnswer(ok,null,q.model)}
+function finishAnswer(ok,btn,correctAnswer){if(qState.answered)return;stopHintTimer();qState=answerQuestionState(qState,ok);document.querySelectorAll("#answer-area button,#answer-area input,#answer-area textarea").forEach(x=>x.disabled=true);if(btn)btn.classList.add(ok?"correct":"wrong");const q=deck[qIndex],fb=document.getElementById("feedback");fb.className=`feedback show ${ok?"ok":"ng"}`;fb.innerHTML=`<b>${ok?"⭕ 正解！":"❌ もう一度覚えよう"}</b>${ok?"":`<div>正解：${correctAnswer}</div>`}<div style="margin-top:7px">${q.explanation}</div><div class="small" style="margin-top:7px">つまずきポイント：${q.misconception}</div>`;results.push({q,ok,usedHint:qState.usedHint});data.attempts++;if(ok)data.correct++;data.weak[q.id]=nextWeakLevel(data.weak[q.id]||0,ok,qState.usedHint);data.history.push({id:q.id,ok,date:Date.now()});data.history=data.history.slice(-300);save();document.getElementById("next-btn").style.display="block";document.getElementById("next-btn").textContent=qIndex===deck.length-1?"結果を見る 📊":"次へ →"}
+function nextQuestion(){if(!qState.answered)return;if(qIndex===deck.length-1){showResult();return}qIndex++;loadQuestion();scrollTo(0,0)}
+function leaveQuiz(){stopHintTimer();currentSubject&&currentSubject.id?openSubject(currentSubject.id):goHome()}
+function showResult(){stopHintTimer();const ok=results.filter(r=>r.ok).length,pct=Math.round(ok/results.length*100);if(currentUnit&&isUnitCleared(ok,results.length)&&!data.cleared.includes(currentUnit.id)){data.cleared.push(currentUnit.id);save()}document.getElementById("result-score").textContent=sessionType==="full"?`${ok*2}/50`:`${pct}%`;document.getElementById("result-message").textContent=pct>=80?"よく理解できています":pct>=60?"あと少しで安定します":"基礎に戻れば伸びます";document.getElementById("result-breakdown").innerHTML=SUBJECTS.map(s=>{const r=results.filter(x=>x.q.subjectId===s.id),c=r.filter(x=>x.ok).length;return`<div class="stat">${s.emoji} ${s.name}<br><b>${r.length?`${c}/${r.length}`:"-"}</b></div>`}).join("");show("result")}
+function retryWrong(){const wrong=results.filter(r=>!r.ok).map(r=>r.q);if(!wrong.length){goHome();return}deck=wrong;currentUnit=null;currentSubject={name:"間違い直し",emoji:"🔁"};beginSession("retry")}
+function showStats(){const rate=data.attempts?Math.round(data.correct/data.attempts*100):0,weak=Object.values(data.weak).filter(v=>v>0).length;document.getElementById("stats-content").innerHTML=`<div class="hero"><div class="score">${rate}%</div><div>累計正答率</div></div><div class="breakdown"><div class="stat"><b>${data.attempts}</b><div class="small">解いた問題</div></div><div class="stat"><b>${weak}</b><div class="small">復習待ち</div></div><div class="stat"><b>${data.cleared.length}</b><div class="small">クリア単元</div></div><div class="stat"><b>${data.streak}</b><div class="small">連続日数</div></div></div>`;show("stats")}
+renderHome();
+</script>
+</body>
+</html>
