@@ -28,3 +28,9 @@ test("every question teaches a first step and full solution",()=>{
  assert.ok(app.questions.some(q=>q.type==="text"));
  assert.ok(app.questions.some(q=>q.type==="choice"));
 });
+
+test("wrong answers are classified into understandable weakness causes",()=>{
+ for(const cause of ["sign","formula","equation","calculation","graph","proof"])assert.match(html,new RegExp(`${cause}:0`));
+ assert.match(html,/今回の苦手タイプ/);
+ assert.match(html,/いちばん多い苦手/);
+});
