@@ -7,6 +7,7 @@
 <title>数学マスター | 静岡県高校受験</title>
 <style>
 *{box-sizing:border-box}body{margin:0;background:#06151b;color:#edfdfb;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;min-height:100vh}button,input{font:inherit}button{cursor:pointer}#app{max-width:440px;margin:auto;padding:18px 15px 70px}.screen{display:none}.screen.active{display:block}.top{display:flex;align-items:center;gap:12px;margin-bottom:18px}.back{width:40px;height:40px;border:1px solid #24434c;border-radius:12px;background:#10272f;color:#9fc1c8}.grow{flex:1}.title{font-size:26px;font-weight:900;letter-spacing:-.7px}.sub{color:#7ca0a8;font-size:13px;margin-top:4px}.streak{display:inline-block;margin-top:10px;background:#f59e0b18;border:1px solid #f59e0b55;color:#fbbf24;padding:5px 11px;border-radius:99px;font-weight:800;font-size:12px}.hero,.card{background:#10272f;border:1px solid #173941;border-radius:19px;padding:18px;margin-bottom:12px}.hero{background:linear-gradient(145deg,#12343b,#0d2229)}.progress{height:7px;background:#183840;border-radius:99px;overflow:hidden}.fill{height:100%;background:linear-gradient(90deg,#14b8a6,#22d3ee);transition:width .35s}.section{margin:24px 3px 10px;color:#5f8790;font-size:11px;font-weight:900;letter-spacing:1px}.subject{display:flex;align-items:center;gap:13px;width:100%;text-align:left;color:inherit}.icon{width:48px;height:48px;border-radius:14px;display:grid;place-items:center;font-size:24px}.subject h3{margin:0 0 4px;font-size:16px}.subject p{margin:0;color:#6d929a;font-size:12px}.arrow{margin-left:auto;color:#22d3ee;font-size:22px}.btn{width:100%;border:0;border-radius:15px;padding:15px 16px;margin-top:9px;background:linear-gradient(135deg,#0d9488,#0891b2);color:white;font-weight:900}.btn.secondary{background:#10272f;border:1px solid #24434c;color:#a8c6cc}.btn:disabled{opacity:.45}.unit{display:flex;align-items:center;gap:12px;text-align:left;width:100%;color:inherit}.unit-num{width:40px;height:40px;border-radius:12px;display:grid;place-items:center;background:#163840;color:#5eead4;font-weight:900}.unit.done{border-color:#10b98155}.tag{display:inline-block;padding:4px 9px;border-radius:99px;background:#0f766e30;color:#5eead4;font-size:11px;font-weight:900}.qtext{font-size:19px;line-height:1.55;font-weight:850;margin:15px 0}.diagram{background:#f8fafc;color:#0f172a;border-radius:14px;padding:13px;margin:12px 0;text-align:center;overflow:auto}.choices{display:grid;gap:9px}.choice{padding:14px;border:2px solid #24434c;border-radius:13px;background:#0a1e25;color:#e7fbf8;text-align:left;font-weight:700}.choice.correct{border-color:#10b981;background:#064e3b}.choice.wrong{border-color:#ef4444;background:#4c1118}.timer{margin:14px 0}.timer-row{display:flex;justify-content:space-between;color:#6f969e;font-size:12px;margin-bottom:6px}.hint{display:none;background:#2b2110;border:1px solid #f59e0b66;color:#fde68a;border-radius:14px;padding:14px;line-height:1.55;margin:12px 0}.hint.show{display:block}.feedback{display:none;border-radius:15px;padding:15px;line-height:1.6;margin:12px 0}.feedback.show{display:block}.feedback.ok{background:#063d32;border:1px solid #10b98166}.feedback.ng{background:#42151a;border:1px solid #ef444466}.numrow{display:flex;gap:8px}.numrow input{flex:1;min-width:0;background:#071a20;color:white;border:2px solid #24434c;border-radius:13px;padding:14px}.numrow span{padding:14px;background:#15343c;border-radius:13px}.result{text-align:center}.score{font-size:50px;font-weight:950;color:#5eead4}.breakdown{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:14px}.stat{background:#0a1f26;border-radius:13px;padding:13px}.small{font-size:12px;color:#72969e}.modal{position:fixed;inset:0;background:#000b;display:none;align-items:center;justify-content:center;padding:20px;z-index:20}.modal.show{display:flex}.modal .box{max-width:420px;width:100%;background:#10272f;border-radius:20px;padding:20px}.danger{color:#fca5a5}.daily{border-color:#22d3ee55;background:linear-gradient(135deg,#12343b,#10272f)}@media(max-width:360px){.qtext{font-size:17px}.title{font-size:23px}}
+.scope-row{display:flex;align-items:center;gap:12px}.scope-row .grow{min-width:0}.scope-toggle{width:auto;min-width:78px;margin:0;padding:10px 12px}.scope-toggle.off{background:#24343a;color:#9bb1b6}.scope-summary{display:flex;justify-content:space-between;align-items:center;gap:12px}.scope-summary .btn{width:auto;margin:0;padding:10px 13px}.unlearned-btn{border-color:#f59e0b99!important;color:#fde68a!important}
 </style>
 </head>
 <body>
@@ -19,6 +20,7 @@
     <div style="display:flex;justify-content:space-between;align-items:end"><div><b>全体進捗</b><div class="small" id="overall-text">基礎から積み上げよう</div></div><b id="overall-pct">0%</b></div>
     <div class="progress" style="margin-top:12px"><div class="fill" id="overall-fill" style="width:0"></div></div>
   </div>
+  <div class="card scope-summary"><div><b>現在の学習範囲</b><div class="small" id="scope-home-summary">中3の範囲を設定してください</div></div><button class="btn secondary" onclick="showScope()">変更</button></div>
   <div class="card daily">
     <span class="tag">今日の10分</span><h3 style="margin:10px 0 5px">まず5問だけ解こう</h3>
     <div class="small">基礎と苦手を混ぜて、無理なく続けます。</div>
@@ -39,8 +41,9 @@
 <section id="screen-question" class="screen">
   <div class="top"><button class="back" onclick="leaveQuiz()">←</button><div class="grow progress"><div id="q-progress" class="fill"></div></div><span class="small" id="q-count"></span></div>
   <div class="card">
-    <div style="display:flex;gap:7px"><span class="tag" id="q-field"></span><span class="tag" id="q-level"></span></div>
+    <div style="display:flex;gap:7px;flex-wrap:wrap"><span class="tag" id="q-field"></span><span class="tag" id="q-level"></span><span class="tag" id="q-topic"></span></div>
     <div class="qtext" id="q-prompt"></div><div id="q-diagram"></div><div id="answer-area"></div>
+    <button class="btn secondary unlearned-btn" id="unlearned-btn" onclick="markCurrentTopicUnlearned()">まだ習っていない</button>
   </div>
   <div class="timer" id="hint-countdown"><div class="timer-row"><span>自力で考える時間</span><span id="timer-number">30秒</span></div><div class="progress"><div class="fill" id="timer-fill" style="width:100%"></div></div></div>
   <div class="hint" id="hint-box"><b>💡 30秒ヒント</b><div id="hint-text" style="margin-top:6px"></div><button class="btn secondary" id="hint2-btn" onclick="showHint2()">もう一段ヒント</button><div id="hint2-text"></div></div>
@@ -51,6 +54,7 @@
 <section id="screen-result" class="screen"><div class="result hero"><div class="small">今回の結果</div><div class="score" id="result-score"></div><h2 id="result-message"></h2><div class="breakdown" id="result-breakdown"></div></div><button class="btn" onclick="retryWrong()">間違えた問題を復習</button><button class="btn secondary" onclick="goHome()">ホームへ</button></section>
 <section id="screen-stats" class="screen"><div class="top"><button class="back" onclick="goHome()">←</button><b>学習記録</b></div><div id="stats-content"></div></section>
 <section id="screen-shizuoka" class="screen"><div class="top"><button class="back" onclick="goHome()">←</button><div><b>🗻 静岡県入試モード</b><div class="small">50分・50点を意識した実戦練習</div></div></div><div class="hero"><h3>直近入試の重点</h3><p class="small">文章題の立式、空間図形、関数の座標、証明を重点化。まず取るべき基礎点から段階的に伸ばします。</p></div><button class="btn" onclick="startMiniMock()">10問ミニ模試</button><button class="btn secondary" onclick="startFullMock()">50点チャレンジ（25問）</button></section>
+<section id="screen-scope" class="screen"><div class="top"><button class="back" onclick="goHome()">←</button><div><b>学習範囲を設定</b><div class="small">中学3年で学校ですでに習った単元を選んでください</div></div></div><div class="hero"><b>中1・中2は初期状態で学習済み</b><div class="small">通常はそのままで構いません。必要な場合だけ下部から見直せます。</div></div><div id="scope-list"></div><div class="card"><b id="scope-count"></b><div class="small">前提単元も学習済みの問題だけを出題します。</div></div><button class="btn" onclick="saveScope()">この範囲で学習する</button></section>
 </main>
 <div class="modal" id="diagram-modal" onclick="this.classList.remove('show')"><div class="box" id="diagram-large"></div></div>
 
@@ -61,6 +65,10 @@ function answerQuestionState(state,isCorrect){if(state.answered)return state;ret
 function advanceQuestionState(nextQuestionId){return createQuestionState(nextQuestionId)}
 function nextWeakLevel(current,correct,usedHint){if(correct&&!usedHint)return Math.max(0,current-1);if(correct)return current;return current+1}
 function isUnitCleared(correctCount,totalCount){return totalCount>0&&correctCount/totalCount>=.7}
+function defaultLearnedTopicIds(topics){return topics.filter(topic=>topic.grade<3).map(topic=>topic.id)}
+function isQuestionAvailable(question,learnedTopics){const learned=new Set(learnedTopics);return learned.has(question.topicId)&&(question.prerequisites||[]).every(id=>learned.has(id))}
+function filterAvailableQuestions(questions,learnedTopics){return questions.filter(question=>isQuestionAvailable(question,learnedTopics))}
+function skipUnlearnedTopic(state,topicId,remainingDeck){return{...state,learnedTopics:state.learnedTopics.filter(id=>id!==topicId),deck:remainingDeck.filter(question=>question.topicId!==topicId)}}
 </script>
 <script>
 const SUBJECTS=[
@@ -68,6 +76,28 @@ const SUBJECTS=[
  {id:"function",name:"関数",emoji:"📈",color:"#22d3ee",desc:"比例・一次関数・放物線"},
  {id:"geometry",name:"図形",emoji:"📐",color:"#a78bfa",desc:"作図・相似・円・空間図形"},
  {id:"data",name:"データ・確率",emoji:"🎲",color:"#10b981",desc:"確率・資料・標本調査"}
+];
+const TOPICS=[
+ {id:"math-positive-negative",name:"正負の数",grade:1,subjectId:"algebra",prerequisites:[]},
+ {id:"math-expressions",name:"文字式",grade:1,subjectId:"algebra",prerequisites:["math-positive-negative"]},
+ {id:"math-linear-equations",name:"一次方程式",grade:1,subjectId:"algebra",prerequisites:["math-expressions"]},
+ {id:"math-proportion",name:"比例・反比例",grade:1,subjectId:"function",prerequisites:["math-positive-negative"]},
+ {id:"math-basic-geometry",name:"基本図形・作図",grade:1,subjectId:"geometry",prerequisites:[]},
+ {id:"math-data-basics",name:"資料の整理",grade:1,subjectId:"data",prerequisites:["math-positive-negative"]},
+ {id:"math-simultaneous-equations",name:"連立方程式",grade:2,subjectId:"algebra",prerequisites:["math-linear-equations"]},
+ {id:"math-linear-functions",name:"一次関数",grade:2,subjectId:"function",prerequisites:["math-linear-equations","math-proportion"]},
+ {id:"math-parallel-angles",name:"平行線と角",grade:2,subjectId:"geometry",prerequisites:["math-basic-geometry"]},
+ {id:"math-congruence",name:"合同と証明",grade:2,subjectId:"geometry",prerequisites:["math-parallel-angles"]},
+ {id:"math-probability",name:"確率",grade:2,subjectId:"data",prerequisites:["math-positive-negative"]},
+ {id:"math-box-plots",name:"箱ひげ図",grade:2,subjectId:"data",prerequisites:["math-data-basics"]},
+ {id:"math-polynomials",name:"式の展開と因数分解",grade:3,subjectId:"algebra",prerequisites:["math-expressions"]},
+ {id:"math-square-roots",name:"平方根",grade:3,subjectId:"algebra",prerequisites:["math-expressions"]},
+ {id:"math-quadratic-equations",name:"二次方程式",grade:3,subjectId:"algebra",prerequisites:["math-polynomials","math-square-roots"]},
+ {id:"math-quadratic-functions",name:"関数 y=ax²",grade:3,subjectId:"function",prerequisites:["math-linear-functions","math-square-roots"]},
+ {id:"math-similarity",name:"相似",grade:3,subjectId:"geometry",prerequisites:["math-congruence"]},
+ {id:"math-circles",name:"円",grade:3,subjectId:"geometry",prerequisites:["math-basic-geometry"]},
+ {id:"math-pythagorean",name:"三平方の定理",grade:3,subjectId:"geometry",prerequisites:["math-square-roots","math-basic-geometry"]},
+ {id:"math-sampling",name:"標本調査",grade:3,subjectId:"data",prerequisites:["math-data-basics","math-probability"]}
 ];
 const UNIT_DEFS={
  algebra:["正負の数・文字式","式の計算・平方根","方程式","連立方程式","二次方程式・文章題","数と式入試演習"],
@@ -116,35 +146,66 @@ const BASE=[
 ["data",4,"number","500人から無作為に50人を調べ、賛成が30人。全体の賛成者を推定すると？",300,"人",1,"標本の割合30/50を全体500に掛ける。","500×30/50=300人。"],
 ["data",4,"choice","標本調査で最も大切な標本の選び方は？",["無作為に選ぶ","賛成者だけ選ぶ","近い人だけ選ぶ","人数を1人にする"],0,"全体の特徴を偏りなく映す必要がある。","母集団から無作為に抽出し、偏りを小さくする。"]
 ];
+function topicForBase(subjectId,unitIndex,prompt){
+ let id;
+ if(subjectId==="algebra"){
+  if(unitIndex===1)id=/−7/.test(prompt)?"math-positive-negative":"math-expressions";
+  else if(unitIndex===2)id=/√/.test(prompt)?"math-square-roots":"math-polynomials";
+  else if(unitIndex===3)id="math-linear-equations";
+  else if(unitIndex===4)id="math-simultaneous-equations";
+  else id="math-quadratic-equations";
+ }else if(subjectId==="function"){
+  id=unitIndex===1?"math-proportion":unitIndex===5?"math-quadratic-functions":"math-linear-functions";
+ }else if(subjectId==="geometry"){
+  if(unitIndex===1)id="math-basic-geometry";
+  else if(unitIndex===2)id=/平行線/.test(prompt)?"math-parallel-angles":"math-basic-geometry";
+  else if(unitIndex===3)id="math-congruence";
+  else if(unitIndex===4)id=/相似比/.test(prompt)?"math-similarity":"math-circles";
+  else id=/直角三角形/.test(prompt)?"math-pythagorean":"math-basic-geometry";
+ }else{
+  if(unitIndex===1)id="math-probability";
+  else if(unitIndex===2)id="math-data-basics";
+  else if(unitIndex===3)id="math-box-plots";
+  else id="math-sampling";
+ }
+ return TOPICS.find(topic=>topic.id===id);
+}
 function buildQuestions(){
  let n=0;const out=[];
- for(const b of BASE)for(let v=0;v<4;v++){n++;const [sid,ui,type,prompt]=b;const hint=type==="number"?b[7]:b[6],explanation=type==="number"?b[8]:b[7];const q={id:`q${n}`,unitId:`${sid}-${ui}`,subjectId:sid,type,level:ui<3?"基礎":ui<6?"標準":"入試",prompt:v?`${prompt}（類題${v+1}）`:prompt,hint1:hint,hint2:`条件を式や図に書き込み、${type==="number"?"途中式を1行ずつ進めよう。":"使う性質と根拠を確かめよう。"}`,explanation,misconception:"暗算で急がず、条件・式・符号・単位を順番に確認しよう。"};
+ for(const b of BASE)for(let v=0;v<4;v++){n++;const [sid,ui,type,prompt]=b,topic=topicForBase(sid,ui,prompt);const hint=type==="number"?b[7]:b[6],explanation=type==="number"?b[8]:b[7];const q={id:`q${n}`,unitId:`${sid}-${ui}`,subjectId:sid,type,level:ui<3?"基礎":ui<6?"標準":"入試",difficulty:ui<3?"基礎":ui<6?"標準":"入試",grade:topic.grade,topicId:topic.id,topicName:topic.name,prerequisites:[...topic.prerequisites],prompt:v?`${prompt}（類題${v+1}）`:prompt,hint1:hint,hint2:`条件を式や図に書き込み、${type==="number"?"途中式を1行ずつ進めよう。":"使う性質と根拠を確かめよう。"}`,explanation,misconception:"暗算で急がず、条件・式・符号・単位を順番に確認しよう。"};
   if(type==="choice"){q.choices=b[4];q.answer=b[5]}else if(type==="number"){q.answer=b[4];q.unit=b[5];q.tolerance=b[6]}else if(type==="order"){q.items=b[4];q.answer=b[4]}else{q.required=b[4];q.model=explanation}
   out.push(q);
  }return out;
 }
 const QUESTIONS=buildQuestions();
 const STORE="sugaku_master_v1";
-const DEFAULT={cleared:[],weak:{},causes:{sign:0,formula:0,equation:0,calculation:0,graph:0,proof:0},attempts:0,correct:0,streak:0,lastDate:"",history:[]};
-function loadStore(){try{const saved=JSON.parse(localStorage.getItem(STORE)||"{}");return{...DEFAULT,...saved,causes:{...DEFAULT.causes,...(saved.causes||{})}}}catch{return{...DEFAULT,causes:{...DEFAULT.causes}}}}
-let data=loadStore(),currentSubject=null,currentUnit=null,deck=[],qIndex=0,results=[],qState=null,hintTimerId=null,sessionType="unit";
+const DEFAULT={cleared:[],weak:{},causes:{sign:0,formula:0,equation:0,calculation:0,graph:0,proof:0},attempts:0,correct:0,streak:0,lastDate:"",history:[],scopeConfigured:false,scopeVersion:1,learnedTopics:defaultLearnedTopicIds(TOPICS),newlyLearnedTopics:{}};
+function loadStore(){try{const saved=JSON.parse(localStorage.getItem(STORE)||"{}"),learned=Array.isArray(saved.learnedTopics)?saved.learnedTopics:defaultLearnedTopicIds(TOPICS);return{...DEFAULT,...saved,learnedTopics:learned,causes:{...DEFAULT.causes,...(saved.causes||{})},newlyLearnedTopics:{...(saved.newlyLearnedTopics||{})}}}catch{return{...DEFAULT,learnedTopics:[...DEFAULT.learnedTopics],causes:{...DEFAULT.causes},newlyLearnedTopics:{}}}}
+let data=loadStore(),currentSubject=null,currentUnit=null,deck=[],qIndex=0,results=[],qState=null,hintTimerId=null,sessionType="unit",scopeDraft=[];
 function save(){localStorage.setItem(STORE,JSON.stringify(data))}
 function show(id){stopHintTimer();document.querySelectorAll(".screen").forEach(x=>x.classList.remove("active"));document.getElementById(`screen-${id}`).classList.add("active");scrollTo(0,0)}
 function subjectOf(id){return SUBJECTS.find(s=>s.id===id)}
+function availableQuestions(questions=QUESTIONS,learnedTopics=data.learnedTopics){return filterAvailableQuestions(questions,learnedTopics)}
+function showScope(){scopeDraft=[...data.learnedTopics];renderScope();show("scope")}
+function scopeTopicRow(topic){const on=scopeDraft.includes(topic.id),missing=topic.prerequisites.filter(id=>!scopeDraft.includes(id)).map(id=>TOPICS.find(item=>item.id===id)?.name).filter(Boolean);return`<div class="card scope-row"><div class="grow"><b>${topic.name}</b><div class="small">${missing.length?`前提：${missing.join("・")}`:"前提単元は学習済み"}</div></div><button class="btn scope-toggle ${on?"":"off"}" onclick="toggleTopic('${topic.id}')">${on?"習った":"まだ"}</button></div>`}
+function renderScope(){const grade3=TOPICS.filter(topic=>topic.grade===3),earlier=TOPICS.filter(topic=>topic.grade<3);document.getElementById("scope-list").innerHTML=SUBJECTS.map(subject=>{const topics=grade3.filter(topic=>topic.subjectId===subject.id);if(!topics.length)return"";return`<div class="section">▸ ${subject.name}</div>${topics.map(scopeTopicRow).join("")}`}).join("")+`<details class="card"><summary><b>中1・中2の範囲を見直す</b></summary><div class="small" style="margin:8px 0 12px">最初はすべて学習済みです。必要な場合だけ変更してください。</div>${earlier.map(scopeTopicRow).join("")}</details>`;document.getElementById("scope-count").textContent=`出題可能：${availableQuestions(QUESTIONS,scopeDraft).length}問`}
+function toggleTopic(id){if(!TOPICS.some(item=>item.id===id))return;scopeDraft=scopeDraft.includes(id)?scopeDraft.filter(item=>item!==id):[...scopeDraft,id];renderScope()}
+function saveScope(){const previous=new Set(data.learnedTopics);data.learnedTopics=[...new Set(scopeDraft.filter(id=>TOPICS.some(topic=>topic.id===id)))];for(const id of data.learnedTopics)if(!previous.has(id))data.newlyLearnedTopics[id]=3;for(const id of Object.keys(data.newlyLearnedTopics))if(!data.learnedTopics.includes(id))delete data.newlyLearnedTopics[id];data.scopeConfigured=true;data.scopeVersion=1;save();goHome()}
 function updateStreak(){const t=new Date().toDateString(),y=new Date(Date.now()-86400000).toDateString();if(data.lastDate!==t){data.streak=data.lastDate===y?data.streak+1:1;data.lastDate=t;save()}document.getElementById("streak").textContent=`🔥 ${data.streak}日連続`}
-function renderHome(){updateStreak();const p=Math.round(data.cleared.length/UNITS.length*100);document.getElementById("overall-pct").textContent=p+"%";document.getElementById("overall-fill").style.width=p+"%";document.getElementById("overall-text").textContent=`${data.cleared.length}/${UNITS.length}単元クリア`;document.getElementById("subject-list").innerHTML=SUBJECTS.map(s=>`<button class="card subject" onclick="openSubject('${s.id}')"><span class="icon" style="background:${s.color}22">${s.emoji}</span><span><h3>${s.name}</h3><p>${s.desc}</p></span><span class="arrow">›</span></button>`).join("")}
+function renderHome(){updateStreak();const p=Math.round(data.cleared.length/UNITS.length*100),learned3=TOPICS.filter(topic=>topic.grade===3&&data.learnedTopics.includes(topic.id)).length,total3=TOPICS.filter(topic=>topic.grade===3).length;document.getElementById("overall-pct").textContent=p+"%";document.getElementById("overall-fill").style.width=p+"%";document.getElementById("overall-text").textContent=`${data.cleared.length}/${UNITS.length}単元クリア`;document.getElementById("scope-home-summary").textContent=data.scopeConfigured?`中1・2＋中3 ${learned3}/${total3}単元・${availableQuestions().length}問`:"最初に中3の範囲を選んでください";document.getElementById("subject-list").innerHTML=SUBJECTS.map(s=>`<button class="card subject" onclick="openSubject('${s.id}')"><span class="icon" style="background:${s.color}22">${s.emoji}</span><span><h3>${s.name}</h3><p>${s.desc}</p></span><span class="arrow">›</span></button>`).join("")}
 function goHome(){show("home");renderHome()}
 function openSubject(id){currentSubject=subjectOf(id);document.getElementById("units-title").textContent=`${currentSubject.emoji} ${currentSubject.name}`;document.getElementById("units-sub").textContent=currentSubject.desc;document.getElementById("unit-list").innerHTML=UNITS.filter(u=>u.subjectId===id).map((u,i)=>`<button class="card unit ${data.cleared.includes(u.id)?"done":""}" onclick="startUnit('${u.id}')"><span class="unit-num">${data.cleared.includes(u.id)?"✓":i+1}</span><span class="grow"><b>${u.name}</b><div class="small">${u.level}・5問</div></span><span>›</span></button>`).join("");show("units")}
-function startUnit(id){currentUnit=UNITS.find(u=>u.id===id);currentSubject=subjectOf(currentUnit.subjectId);deck=shuffle(QUESTIONS.filter(q=>q.unitId===id)).slice(0,5);beginSession("unit")}
+function startUnit(id){const availableQuestions=filterAvailableQuestions(QUESTIONS.filter(q=>q.unitId===id),data.learnedTopics);currentUnit=UNITS.find(u=>u.id===id);currentSubject=subjectOf(currentUnit.subjectId);beginAvailableSession(shuffle(availableQuestions).slice(0,5),"unit")}
 function shuffle(a){return[...a].sort(()=>Math.random()-.5)}
 function beginSession(type){sessionType=type;qIndex=0;results=[];show("question");loadQuestion()}
-function startDaily(){const weakIds=Object.entries(data.weak).filter(([,v])=>v>0).map(([id])=>id);const pool=[...QUESTIONS.filter(q=>weakIds.includes(q.id)),...shuffle(QUESTIONS)];deck=[...new Map(pool.map(q=>[q.id,q])).values()].slice(0,5);currentUnit=null;currentSubject={name:"今日の10分",emoji:"⏱"};beginSession("daily")}
-function startWeak(){const pool=QUESTIONS.filter(q=>(data.weak[q.id]||0)>0).sort((a,b)=>(data.weak[b.id]||0)-(data.weak[a.id]||0));if(!pool.length){alert("苦手問題はまだありません。まず今日の学習に挑戦しよう。");return}deck=pool.slice(0,10);currentUnit=null;currentSubject={name:"苦手特訓",emoji:"🎯"};beginSession("weak")}
+function beginAvailableSession(questions,type){if(!data.scopeConfigured){showScope();return}if(!questions.length){alert("現在の学習範囲に出題できる問題がありません。学習範囲を確認してください。");showScope();return}deck=questions;beginSession(type)}
+function startDaily(){const availableQuestions=filterAvailableQuestions(QUESTIONS,data.learnedTopics);const weakIds=Object.entries(data.weak).filter(([,v])=>v>0).map(([id])=>id),newIds=Object.entries(data.newlyLearnedTopics).filter(([,count])=>count>0).map(([id])=>id);const pool=[...availableQuestions.filter(q=>newIds.includes(q.topicId)&&q.difficulty==="基礎"),...availableQuestions.filter(q=>weakIds.includes(q.id)),...shuffle(availableQuestions)];currentUnit=null;currentSubject={name:"今日の10分",emoji:"⏱"};beginAvailableSession([...new Map(pool.map(q=>[q.id,q])).values()].slice(0,5),"daily")}
+function startWeak(){const availableQuestions=filterAvailableQuestions(QUESTIONS,data.learnedTopics);const pool=availableQuestions.filter(q=>(data.weak[q.id]||0)>0).sort((a,b)=>(data.weak[b.id]||0)-(data.weak[a.id]||0));if(data.scopeConfigured&&!pool.length){alert("学習済み範囲に苦手問題はまだありません。まず今日の学習に挑戦しよう。");return}currentUnit=null;currentSubject={name:"苦手特訓",emoji:"🎯"};beginAvailableSession(pool.slice(0,10),"weak")}
 function showShizuoka(){show("shizuoka")}
-function startMiniMock(){deck=balanced(10);currentUnit=null;currentSubject={name:"静岡県ミニ模試",emoji:"🗻"};beginSession("mock")}
-function startFullMock(){deck=balanced(25);currentUnit=null;currentSubject={name:"50点チャレンジ",emoji:"📝"};beginSession("full")}
-function balanced(count){const each=Math.floor(count/4),arr=[];SUBJECTS.forEach((s,i)=>arr.push(...shuffle(QUESTIONS.filter(q=>q.subjectId===s.id&&q.level!=="基礎")).slice(0,each+(i<count%4?1:0))));return shuffle(arr)}
-function loadQuestion(){const q=deck[qIndex];qState=createQuestionState(q.id);document.getElementById("q-count").textContent=`${qIndex+1}/${deck.length}`;document.getElementById("q-progress").style.width=`${qIndex/deck.length*100}%`;document.getElementById("q-field").textContent=`${subjectOf(q.subjectId).emoji} ${subjectOf(q.subjectId).name}`;document.getElementById("q-level").textContent=q.level;document.getElementById("q-prompt").textContent=q.prompt;document.getElementById("q-diagram").innerHTML=makeDiagram(q);renderAnswer(q);document.getElementById("hint-box").classList.remove("show");document.getElementById("hint2-text").textContent="";document.getElementById("hint2-btn").style.display="block";document.getElementById("feedback").className="feedback";document.getElementById("next-btn").style.display="none";renderTimer();startHintTimer()}
+function startMiniMock(){currentUnit=null;currentSubject={name:"静岡県ミニ模試",emoji:"🗻"};beginAvailableSession(balanced(10),"mock")}
+function startFullMock(){currentUnit=null;currentSubject={name:"50点チャレンジ",emoji:"📝"};beginAvailableSession(balanced(25),"full")}
+function balanced(count){const availableQuestions=filterAvailableQuestions(QUESTIONS,data.learnedTopics),each=Math.floor(count/4),arr=[];SUBJECTS.forEach((s,i)=>arr.push(...shuffle(availableQuestions.filter(q=>q.subjectId===s.id&&q.level!=="基礎")).slice(0,each+(i<count%4?1:0))));return shuffle(arr)}
+function loadQuestion(){const q=deck[qIndex];qState=createQuestionState(q.id);document.getElementById("q-count").textContent=`${qIndex+1}/${deck.length}`;document.getElementById("q-progress").style.width=`${qIndex/deck.length*100}%`;document.getElementById("q-field").textContent=`${subjectOf(q.subjectId).emoji} ${subjectOf(q.subjectId).name}`;document.getElementById("q-level").textContent=q.level;document.getElementById("q-topic").textContent=`中${q.grade}・${q.topicName}`;document.getElementById("q-prompt").textContent=q.prompt;document.getElementById("q-diagram").innerHTML=makeDiagram(q);renderAnswer(q);document.getElementById("unlearned-btn").style.display="block";document.getElementById("hint-box").classList.remove("show");document.getElementById("hint2-text").textContent="";document.getElementById("hint2-btn").style.display="block";document.getElementById("feedback").className="feedback";document.getElementById("next-btn").style.display="none";renderTimer();startHintTimer()}
 function makeDiagram(q){if(q.subjectId==="function")return`<div class="diagram" onclick="enlarge(this.innerHTML)"><svg viewBox="0 0 300 150"><line x1="20" y1="75" x2="285" y2="75" stroke="#64748b"/><line x1="150" y1="10" x2="150" y2="140" stroke="#64748b"/><path d="M35 125 L250 20" stroke="#0891b2" stroke-width="3" fill="none"/><text x="270" y="68">x</text><text x="157" y="18">y</text></svg><div class="small">座標・傾き・切片を図で確認</div></div>`;if(q.subjectId==="geometry")return`<div class="diagram" onclick="enlarge(this.innerHTML)"><svg viewBox="0 0 300 150"><path d="M45 125 L150 20 L255 125 Z" stroke="#7c3aed" stroke-width="4" fill="none"/><line x1="150" y1="20" x2="150" y2="125" stroke="#f59e0b" stroke-dasharray="6 4"/><text x="142" y="145">底辺</text><text x="157" y="75">高さ</text></svg><div class="small">対応する辺・角、底面と高さを確認</div></div>`;if(q.type==="number")return`<div class="diagram"><b>途中式メモ</b><br>求める量 → 使う公式 → 数値を代入 → 符号・単位を確認</div>`;return""}
 function enlarge(html){document.getElementById("diagram-large").innerHTML=html;document.getElementById("diagram-modal").classList.add("show")}
 function renderAnswer(q){const a=document.getElementById("answer-area");if(q.type==="choice")a.innerHTML=`<div class="choices">${q.choices.map((c,i)=>`<button class="choice" onclick="answer(${i},this)">${c}</button>`).join("")}</div>`;else if(q.type==="number")a.innerHTML=`<div class="numrow"><input id="number-answer" inputmode="decimal" placeholder="数値を入力"><span>${q.unit}</span></div><button class="btn" onclick="answerNumber()">答える</button>`;else if(q.type==="order")a.innerHTML=`<div class="small">正しい順番を考えよう</div><div class="choices">${q.items.map((x,i)=>`<button class="choice" onclick="answerOrder(${i})">${i+1}. ${x}</button>`).join("")}</div><button class="btn" onclick="answerOrderDone()">この順で答える</button>`;else a.innerHTML=`<textarea id="text-answer" style="width:100%;min-height:100px;background:#071a20;color:white;border:2px solid #24434c;border-radius:13px;padding:12px" placeholder="理由を書こう"></textarea><button class="btn" onclick="answerText()">答える</button>`}
@@ -159,11 +220,12 @@ function answerNumber(){const q=deck[qIndex],v=Number(document.getElementById("n
 let orderClicks=[];function answerOrder(i){if(!qState.answered&&!orderClicks.includes(i)){orderClicks.push(i);event.currentTarget.style.opacity=".45"}}
 function answerOrderDone(){const q=deck[qIndex],ok=orderClicks.length===q.items.length&&orderClicks.every((x,i)=>x===i);finishAnswer(ok,null,q.items.join(" → "));orderClicks=[]}
 function answerText(){const q=deck[qIndex],t=document.getElementById("text-answer").value,ok=q.required.every(k=>t.includes(k));finishAnswer(ok,null,q.model)}
-function finishAnswer(ok,btn,correctAnswer){if(qState.answered)return;stopHintTimer();qState=answerQuestionState(qState,ok);document.querySelectorAll("#answer-area button,#answer-area input,#answer-area textarea").forEach(x=>x.disabled=true);if(btn)btn.classList.add(ok?"correct":"wrong");const q=deck[qIndex],cause=causeOf(q),fb=document.getElementById("feedback");fb.className=`feedback show ${ok?"ok":"ng"}`;fb.innerHTML=`<b>${ok?"⭕ 正解！":"❌ もう一度覚えよう"}</b>${ok?"":`<div>正解：${correctAnswer}</div><div class="tag" style="margin-top:8px">今回の苦手タイプ：${cause[1]}</div>`}<div style="margin-top:7px">${q.explanation}</div><div class="small" style="margin-top:7px">つまずきポイント：${q.misconception}</div>`;results.push({q,ok,usedHint:qState.usedHint,cause:cause[0]});data.attempts++;if(ok)data.correct++;else data.causes[cause[0]]=(data.causes[cause[0]]||0)+1;data.weak[q.id]=nextWeakLevel(data.weak[q.id]||0,ok,qState.usedHint);data.history.push({id:q.id,ok,cause:ok?null:cause[0],date:Date.now()});data.history=data.history.slice(-300);save();document.getElementById("next-btn").style.display="block";document.getElementById("next-btn").textContent=qIndex===deck.length-1?"結果を見る 📊":"次へ →"}
+function markCurrentTopicUnlearned(){const q=deck[qIndex];if(!q||qState.answered)return;stopHintTimer();const skipped=skipUnlearnedTopic(data,q.topicId,deck.slice(qIndex+1)),nextDeck=skipped.deck;delete skipped.deck;data=skipped;delete data.newlyLearnedTopics[q.topicId];save();if(!nextDeck.length){alert("残りの問題がありません。学習範囲を確認してください。");showScope();return}deck=nextDeck;qIndex=0;loadQuestion()}
+function finishAnswer(ok,btn,correctAnswer){if(qState.answered)return;stopHintTimer();qState=answerQuestionState(qState,ok);document.querySelectorAll("#answer-area button,#answer-area input,#answer-area textarea").forEach(x=>x.disabled=true);document.getElementById("unlearned-btn").style.display="none";if(btn)btn.classList.add(ok?"correct":"wrong");const q=deck[qIndex],cause=causeOf(q),fb=document.getElementById("feedback");fb.className=`feedback show ${ok?"ok":"ng"}`;fb.innerHTML=`<b>${ok?"⭕ 正解！":"❌ もう一度覚えよう"}</b>${ok?"":`<div>正解：${correctAnswer}</div><div class="tag" style="margin-top:8px">今回の苦手タイプ：${cause[1]}</div>`}<div style="margin-top:7px">${q.explanation}</div><div class="small" style="margin-top:7px">つまずきポイント：${q.misconception}</div>`;results.push({q,ok,usedHint:qState.usedHint,cause:cause[0]});data.attempts++;if(ok)data.correct++;else data.causes[cause[0]]=(data.causes[cause[0]]||0)+1;data.weak[q.id]=nextWeakLevel(data.weak[q.id]||0,ok,qState.usedHint);if((data.newlyLearnedTopics[q.topicId]||0)>0)data.newlyLearnedTopics[q.topicId]--;data.history.push({id:q.id,ok,cause:ok?null:cause[0],date:Date.now()});data.history=data.history.slice(-300);save();document.getElementById("next-btn").style.display="block";document.getElementById("next-btn").textContent=qIndex===deck.length-1?"結果を見る 📊":"次へ →"}
 function nextQuestion(){if(!qState.answered)return;if(qIndex===deck.length-1){showResult();return}qIndex++;loadQuestion();scrollTo(0,0)}
 function leaveQuiz(){stopHintTimer();currentSubject&&currentSubject.id?openSubject(currentSubject.id):goHome()}
 function showResult(){stopHintTimer();const ok=results.filter(r=>r.ok).length,pct=Math.round(ok/results.length*100);if(currentUnit&&isUnitCleared(ok,results.length)&&!data.cleared.includes(currentUnit.id)){data.cleared.push(currentUnit.id);save()}document.getElementById("result-score").textContent=sessionType==="full"?`${ok*2}/50`:`${pct}%`;document.getElementById("result-message").textContent=pct>=80?"よく理解できています":pct>=60?"あと少しで安定します":"基礎に戻れば伸びます";document.getElementById("result-breakdown").innerHTML=SUBJECTS.map(s=>{const r=results.filter(x=>x.q.subjectId===s.id),c=r.filter(x=>x.ok).length;return`<div class="stat">${s.emoji} ${s.name}<br><b>${r.length?`${c}/${r.length}`:"-"}</b></div>`}).join("");show("result")}
-function retryWrong(){const wrong=results.filter(r=>!r.ok).map(r=>r.q);if(!wrong.length){goHome();return}deck=wrong;currentUnit=null;currentSubject={name:"間違い直し",emoji:"🔁"};beginSession("retry")}
+function retryWrong(){const availableQuestions=filterAvailableQuestions(results.filter(r=>!r.ok).map(r=>r.q),data.learnedTopics);if(!availableQuestions.length){goHome();return}currentUnit=null;currentSubject={name:"間違い直し",emoji:"🔁"};beginAvailableSession(availableQuestions,"retry")}
 function showStats(){const rate=data.attempts?Math.round(data.correct/data.attempts*100):0,weak=Object.values(data.weak).filter(v=>v>0).length,labels={sign:"符号",formula:"公式・解法選択",equation:"立式",calculation:"計算手順",graph:"グラフ・座標",proof:"証明の根拠"},top=Object.entries(data.causes||{}).sort((a,b)=>b[1]-a[1])[0],advice={sign:"正負の数を数直線で確認しよう",formula:"問題文から求める量を囲もう",equation:"何をxとするか書いてから式を作ろう",calculation:"途中式を1行ずつ書こう",graph:"座標と傾きを図に書き込もう",proof:"等しい辺・角と根拠をセットで書こう"};document.getElementById("stats-content").innerHTML=`<div class="hero"><div class="score">${rate}%</div><div>累計正答率</div></div>${top&&top[1]>0?`<div class="card"><span class="tag">いちばん多い苦手</span><h3>${labels[top[0]]} ${top[1]}回</h3><div class="small">${advice[top[0]]}</div></div>`:""}<div class="breakdown"><div class="stat"><b>${data.attempts}</b><div class="small">解いた問題</div></div><div class="stat"><b>${weak}</b><div class="small">復習待ち</div></div><div class="stat"><b>${data.cleared.length}</b><div class="small">クリア単元</div></div><div class="stat"><b>${data.streak}</b><div class="small">連続日数</div></div></div>`;show("stats")}
 
 let canvasScrollY=0;
@@ -204,6 +266,10 @@ window.showShizuoka = showShizuoka;
 window.showStats = showStats;
 window.enlarge = enlarge;
 window.showHint2 = showHint2;
+window.showScope = showScope;
+window.toggleTopic = toggleTopic;
+window.saveScope = saveScope;
+window.markCurrentTopicUnlearned = markCurrentTopicUnlearned;
 
 renderHome();
 </script>
